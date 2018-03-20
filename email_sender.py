@@ -8,12 +8,12 @@ import os
 
 class EmailSender(object):
 
-    def __init__(self, img_folder):
+    def __init__(self, img_folder, subject, body):
         self.email_from = 'contacto@fundaciontelefonica.com'
         self.email_pwd = ''
 
-        self.email_subject = 'Laban Interactive Installation'
-        self.body = 'Este es tu clip Laban!'
+        self.email_subject = subject
+        self.body = body
 
         self.img_folder = img_folder
 

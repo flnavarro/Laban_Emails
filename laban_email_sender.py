@@ -9,6 +9,10 @@ xml_folder += '/'
 img_folder += '/'
 extension = '.gif'
 
+subject = 'Laban Interactive Installation'
+body = 'Hola! Este es tu clip Laban!'
+email_sender = EmailSender(img_folder, subject, body)
+
 start_time = time.time()
 
 print('Laban email sender activated...')
@@ -23,7 +27,6 @@ while True:
             root = tree.getroot()
             email_to = root[0].text
             file_name = root[1].text + extension
-            email_sender = EmailSender(img_folder)
             email_sender.send_email(email_to, file_name)
             os.remove(xml_path)
     if not new_files:
