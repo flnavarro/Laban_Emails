@@ -1,16 +1,17 @@
+# -*- coding: utf-8 -*-
 import os
 import xml.etree.ElementTree as ET
 from email_sender import EmailSender
 import time
 
-xml_folder = '/Users/felipelnv/Documents/openFrameworks/of_v0.9.8_osx/apps/Labam/00_laban/bin/data/xmlOutput'
-img_folder = '/Users/felipelnv/Documents/openFrameworks/of_v0.9.8_osx/apps/Labam/00_laban/bin/data/imgOutput'
+xml_folder = 'C:/Users/pc1/Desktop/LABAN FILES NO BORRAR/bin/data/xml/envios'
+img_folder = 'C:/Users/pc1/Desktop/LABAN FILES NO BORRAR/bin/data/images/envios'
 xml_folder += '/'
 img_folder += '/'
 extension = '.gif'
 
-subject = 'Laban Interactive Installation'
-body = 'Hola! Este es tu clip Laban!'
+subject = 'Instalación Laban Simplificada'
+body = 'Hola! Aquí puedes ver tu clip Laban!'
 email_sender = EmailSender(img_folder, subject, body)
 
 start_time = time.time()
