@@ -8,7 +8,7 @@ xml_folder = 'C:/Users/pc1/Desktop/LABAN FILES NO BORRAR/bin/data/xml/envios'
 img_folder = 'C:/Users/pc1/Desktop/LABAN FILES NO BORRAR/bin/data/images/envios'
 xml_folder += '/'
 img_folder += '/'
-extension = '.gif'
+extension = '.png'
 
 subject = 'Instalación Laban Simplificada'
 body = 'Hola! Aquí puedes ver tu clip Laban!'

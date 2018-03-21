@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import smtplib
 from email import MIMEMultipart
 from email import MIMEText
@@ -27,15 +28,18 @@ class EmailSender(object):
 
         # Image attachment
         file_path = self.img_folder + file_name
-        attachment = open(file_path, 'rb')
-        part = MIMEBase.MIMEBase('application', 'octet-stream')
-        part.set_payload(attachment.read())
-        encoders.encode_base64(part)
-        part.add_header('Content-Disposition', 'attachment; filename= %s' % file_name)
-        msg.attach(part)
+        if os.path.isfile(file_path):
+            attachment = open(file_path, 'rb')
+            part = MIMEBase.MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+            encoders.encode_base64(part)
+            part.add_header('Content-Disposition', 'attachment; filename= %s' % file_name)
+            msg.attach(part)
 
-        # Message as string
-        text = msg.as_string()
+            # Message as string
+            text = msg.as_string()
+        else:
+            text = None
         return text
 
     def server_login(self):
@@ -48,13 +52,17 @@ class EmailSender(object):
     def send_email(self, email_to, file_name):
         # Compose message
         email_msg = self.compose_message(email_to, file_name)
-        # Get server
-        server = self.server_login()
-        # Send e-mail
-        try:
-            server.sendmail(self.email_from, email_to, email_msg)
-            print('E-mail sent to address: ' + email_to + ' with attached file' + file_name)
-        except smtplib.SMTPRecipientsRefused:
-            print('Not a valid address!')
-        # Close server
-        server.quit()
+        if email_msg is not None:
+            # Get server
+            server = self.server_login()
+            # Send e-mail
+            try:
+                server.sendmail(self.email_from, email_to, email_msg)
+                print('E-mail sent to address: ' + email_to + ' with attached file' + file_name)
+            except smtplib.SMTPRecipientsRefused:
+                print('Not a valid address!')
+            # Close server
+            server.quit()
+        else:
+            print('I have not found any png available with the name: ' + file_name)
+            print('Sorry, not possible to send e-mail without attachment.')
